@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">IrrigationSystem</string>
+    <string name="username">Потребителско име</string>
+    <string name="password">Парола</string>
+    <string name="first_name">Име</string>
+    <string name="last_name">Фамилия</string>
+    <string name="email">Email</string>
+    <string name="login">Вход</string>
+    <string name="registration">Регистрация</string>
+    <string name="select_plant_type">Добавяне на нова култура</string>
+    <string name="plant_type">Тип култура:</string>
+    <string name="planting_date">Дата на засаждане:</string>
+    <string name="add_plant_type">Добави</string>
+    <string name="add_plant">Добави култура</string>
+</resources>
