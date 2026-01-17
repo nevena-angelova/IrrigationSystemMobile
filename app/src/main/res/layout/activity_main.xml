@@ -10,6 +10,7 @@
         android:id="@+id/addPlant"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/dark_blue_gray"
         android:text="@string/add_plant" />
 
     <ListView xmlns:android="http://schemas.android.com/apk/res/android"

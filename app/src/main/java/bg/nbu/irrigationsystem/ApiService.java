@@ -31,4 +31,7 @@ public interface ApiService {
             @Path("relayId") int relayId,
             @Path("irrigationDuration") int irrigationDuration
     );
+
+    @POST("api/plant/create")
+    Call<String> createPlant(@Body JsonObject plantInfo);
 }

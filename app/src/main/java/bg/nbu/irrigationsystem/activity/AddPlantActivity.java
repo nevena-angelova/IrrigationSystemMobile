@@ -2,10 +2,13 @@ package bg.nbu.irrigationsystem.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -21,6 +24,9 @@ import retrofit2.Response;
 
 public class AddPlantActivity extends AppCompatActivity {
 
+    Spinner spinner;
+    EditText et_planting_date;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +39,8 @@ public class AddPlantActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
+        spinner = findViewById(R.id.plantTypes);
+
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         apiService.getPlantTypes().enqueue(new Callback<>() {
             @Override
@@ -43,7 +51,6 @@ public class AddPlantActivity extends AppCompatActivity {
 
                     PlantTypeAdapter adapter = new PlantTypeAdapter(AddPlantActivity.this, plantTypes);
 
-                    Spinner spinner = findViewById(R.id.plantTypes);
                     spinner.setAdapter(adapter);
                 }
             }
@@ -52,6 +59,36 @@ public class AddPlantActivity extends AppCompatActivity {
             public void onFailure(Call<List<PlantTypeModel>> call, Throwable t) {
                 Toast.makeText(AddPlantActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
+        });
+
+        Button addButton = findViewById(R.id.login);
+
+        addButton.setOnClickListener(view -> {
+
+            PlantTypeModel selectedPlant = (PlantTypeModel) spinner.getSelectedItem();
+            Integer plantTypeId = selectedPlant.getId();
+
+            et_planting_date= findViewById(R.id.plantingDate);
+            String plantingDate = et_planting_date.getText().toString();
+
+            JsonObject plantInfo = new JsonObject();
+            plantInfo.addProperty("plantTypeId", plantTypeId);
+            plantInfo.addProperty("plantingDate", plantingDate);
+
+            apiService.createPlant(plantInfo).enqueue(new Callback<String>() {
+
+                @Override
+                public void onResponse(Call<String> call, Response<String> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(AddPlantActivity.this, response.body() , Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<String> call, Throwable t) {
+                    Toast.makeText(AddPlantActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         });
 
     }
