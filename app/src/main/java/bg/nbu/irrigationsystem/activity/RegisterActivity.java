@@ -42,6 +42,7 @@ public class RegisterActivity extends AppCompatActivity {
         );
     }
 
+    // Register to the API and save the token to the session
     private void register(String username, String password, String email, String firstName, String lastName) {
 
         JsonObject credentials = new JsonObject();

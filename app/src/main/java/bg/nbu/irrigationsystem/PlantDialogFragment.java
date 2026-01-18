@@ -19,7 +19,6 @@ import retrofit2.Response;
 public class PlantDialogFragment extends DialogFragment {
 
     private static final String ARG_PLANT = "plant";
-
     Button btn_irrigate;
 
 
@@ -37,23 +36,7 @@ public class PlantDialogFragment extends DialogFragment {
 
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_fragment_plant, null);
 
-        TextView growthPhaseName = view.findViewById(R.id.growthPhaseName);
-        TextView plantingDate = view.findViewById(R.id.plantingDate);
-        TextView growthPhaseDetails = view.findViewById(R.id.growthPhaseDetails);
-        TextView soilMoisture = view.findViewById(R.id.soilMoisture);
-        TextView minSoilMoisture = view.findViewById(R.id.minSoilMoisture);
-        TextView maxSoilMoisture = view.findViewById(R.id.maxSoilMoisture);
-        TextView irrigationDuration = view.findViewById(R.id.irrigationDuration);
-        TextView warnings = view.findViewById(R.id.warnings);
-
-        growthPhaseName.setText(plant.getGrowthPhaseName());
-        plantingDate.setText(plant.getPlantingDate());
-        growthPhaseDetails.setText(plant.getGrowthPhaseDetails());
-        soilMoisture.setText(String.valueOf(plant.getSoilMoisture()));
-        minSoilMoisture.setText(String.valueOf(plant.getMinSoilMoisture()));
-        maxSoilMoisture.setText(String.valueOf(plant.getMaxSoilMoisture()));
-        irrigationDuration.setText(String.valueOf(plant.getIrrigationDuration()));
-        warnings.setText(android.text.TextUtils.join(", ", plant.getWarnings()));
+        setViewFields(view, plant);
 
         btn_irrigate = view.findViewById(R.id.btnIrrigate);
 
@@ -74,6 +57,28 @@ public class PlantDialogFragment extends DialogFragment {
                 .create();
     }
 
+    // Set plant fields to the dialog view
+    private void setViewFields(View view, PlantModel plant) {
+        TextView growthPhaseName = view.findViewById(R.id.growthPhaseName);
+        TextView plantingDate = view.findViewById(R.id.plantingDate);
+        TextView growthPhaseDetails = view.findViewById(R.id.growthPhaseDetails);
+        TextView soilMoisture = view.findViewById(R.id.soilMoisture);
+        TextView minSoilMoisture = view.findViewById(R.id.minSoilMoisture);
+        TextView maxSoilMoisture = view.findViewById(R.id.maxSoilMoisture);
+        TextView irrigationDuration = view.findViewById(R.id.irrigationDuration);
+        TextView warnings = view.findViewById(R.id.warnings);
+
+        growthPhaseName.setText(plant.getGrowthPhaseName());
+        plantingDate.setText(plant.getPlantingDate());
+        growthPhaseDetails.setText(plant.getGrowthPhaseDetails());
+        soilMoisture.setText(String.valueOf(plant.getSoilMoisture()));
+        minSoilMoisture.setText(String.valueOf(plant.getMinSoilMoisture()));
+        maxSoilMoisture.setText(String.valueOf(plant.getMaxSoilMoisture()));
+        irrigationDuration.setText(String.valueOf(plant.getIrrigationDuration()));
+        warnings.setText(android.text.TextUtils.join(", ", plant.getWarnings()));
+    }
+
+    // Irrigate plant to the API
     private void irrigate(int deviceId, int relayId, double irrigationDuration) {
 
         ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
@@ -89,7 +94,6 @@ public class PlantDialogFragment extends DialogFragment {
             public void onFailure(Call<String> call, Throwable t) {
                 Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
-
         });
     }
 }

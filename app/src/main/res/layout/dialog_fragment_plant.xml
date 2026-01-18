@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Фаза на развитие: " />
+                android:text="@string/growth_phase" />
 
             <TextView
                 android:id="@+id/growthPhaseName"
@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Засаждане: " />
+                android:text="@string/planting_date" />
 
             <TextView
                 android:id="@+id/plantingDate"
@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Препоръки: " />
+                android:text="@string/recommendations" />
 
             <TextView
                 android:id="@+id/growthPhaseDetails"
@@ -87,7 +87,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Влажност: " />
+                android:text="@string/moisture" />
 
             <TextView
                 android:id="@+id/soilMoisture"
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Минимална влажност: " />
+                android:text="@string/min_moisture" />
 
             <TextView
                 android:id="@+id/minSoilMoisture"
@@ -142,7 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Максимална влажност: " />
+                android:text="@string/max_moisture" />
 
             <TextView
                 android:id="@+id/maxSoilMoisture"
@@ -169,18 +169,19 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingRight="10dp"
-                android:text="Поливане: " />
+                android:text="@string/irrigation" />
 
             <TextView
                 android:id="@+id/irrigationDuration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:paddingRight="10dp"
                 tools:text="15" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="мин" />
+                android:text="@string/minutes" />
 
         </LinearLayout>
 

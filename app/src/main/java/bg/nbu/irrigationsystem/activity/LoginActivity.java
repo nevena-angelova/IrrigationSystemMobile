@@ -47,9 +47,9 @@ public class LoginActivity extends AppCompatActivity {
 
         btn_login = findViewById(R.id.login);
         btn_login.setOnClickListener(v -> login(et_username.getText().toString(), et_password.getText().toString()));
-
     }
 
+    // Login to the API and save the token to the session
     private void login(String username, String password) {
 
         SessionManager session = new SessionManager(LoginActivity.this);

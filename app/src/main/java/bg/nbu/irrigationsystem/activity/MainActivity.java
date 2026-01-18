@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Check if user is logged in and redirect to login if not
         SessionManager session = new SessionManager(this);
         if (!session.isLoggedIn()) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -44,6 +45,11 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        setPlants();
+    }
+
+    // Get plants from API and set them to the list view
+    private void setPlants(){
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         apiService.getPlants().enqueue(new Callback<>() {
             @Override
@@ -61,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // Set plants to the list view
     private void setListView(List<PlantModel> plants){
         for (PlantModel plant : plants) {
             plant.setIcon();

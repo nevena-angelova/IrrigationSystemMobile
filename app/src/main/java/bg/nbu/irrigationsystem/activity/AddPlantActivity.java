@@ -25,13 +25,13 @@ import retrofit2.Response;
 public class AddPlantActivity extends AppCompatActivity {
 
     Spinner spinner;
-    EditText et_planting_date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plant);
 
+        // Check if user is logged in and redirect to login if not
         SessionManager session = new SessionManager(this);
         if (!session.isLoggedIn()) {
             Intent intent = new Intent(AddPlantActivity.this, LoginActivity.class);
@@ -39,9 +39,17 @@ public class AddPlantActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        spinner = findViewById(R.id.plantTypes);
-
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
+
+        setPlantTypes(apiService);
+
+        Button addButton = findViewById(R.id.login);
+
+        addButton.setOnClickListener(view -> addPlant(apiService));
+    }
+
+    // Get plant types from API and set them to the spinner
+    private void setPlantTypes(ApiService apiService){
         apiService.getPlantTypes().enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<List<PlantTypeModel>> call, Response<List<PlantTypeModel>> response) {
@@ -51,6 +59,7 @@ public class AddPlantActivity extends AppCompatActivity {
 
                     PlantTypeAdapter adapter = new PlantTypeAdapter(AddPlantActivity.this, plantTypes);
 
+                    spinner = findViewById(R.id.plantTypes);
                     spinner.setAdapter(adapter);
                 }
             }
@@ -60,36 +69,33 @@ public class AddPlantActivity extends AppCompatActivity {
                 Toast.makeText(AddPlantActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
-        Button addButton = findViewById(R.id.login);
+    // Add plant to the API
+    private void addPlant(ApiService apiService) {
+        PlantTypeModel selectedPlant = (PlantTypeModel) spinner.getSelectedItem();
+        Integer plantTypeId = selectedPlant.getId();
 
-        addButton.setOnClickListener(view -> {
+        EditText et_planting_date= findViewById(R.id.plantingDate);
+        String plantingDate = et_planting_date.getText().toString();
 
-            PlantTypeModel selectedPlant = (PlantTypeModel) spinner.getSelectedItem();
-            Integer plantTypeId = selectedPlant.getId();
+        JsonObject plantInfo = new JsonObject();
+        plantInfo.addProperty("plantTypeId", plantTypeId);
+        plantInfo.addProperty("plantingDate", plantingDate);
 
-            et_planting_date= findViewById(R.id.plantingDate);
-            String plantingDate = et_planting_date.getText().toString();
+        apiService.createPlant(plantInfo).enqueue(new Callback<String>() {
 
-            JsonObject plantInfo = new JsonObject();
-            plantInfo.addProperty("plantTypeId", plantTypeId);
-            plantInfo.addProperty("plantingDate", plantingDate);
-
-            apiService.createPlant(plantInfo).enqueue(new Callback<String>() {
-
-                @Override
-                public void onResponse(Call<String> call, Response<String> response) {
-                    if (response.isSuccessful()) {
-                        Toast.makeText(AddPlantActivity.this, response.body() , Toast.LENGTH_SHORT).show();
-                    }
+            @Override
+            public void onResponse(Call<String> call, Response<String> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(AddPlantActivity.this, response.body() , Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<String> call, Throwable t) {
-                    Toast.makeText(AddPlantActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+            @Override
+            public void onFailure(Call<String> call, Throwable t) {
+                Toast.makeText(AddPlantActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
         });
-
     }
 }
