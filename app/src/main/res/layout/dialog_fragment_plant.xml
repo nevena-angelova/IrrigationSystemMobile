@@ -193,16 +193,16 @@
             tools:text="Low moisture"
             android:textColor="@android:color/holo_red_dark" />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/btnIrrigate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/irrigate"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/dark_green"
+            android:textColor="@android:color/white" />
 
-    <Button
-        android:id="@+id/btnIrrigate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Полей"
-        android:layout_marginTop="16dp"
-        android:visibility="gone"
-        android:backgroundTint="@color/dark_green"
-        android:textColor="@android:color/white" />
+    </LinearLayout>
 
 </LinearLayout>

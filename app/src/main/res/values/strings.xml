@@ -19,4 +19,6 @@
     <string name="max_moisture">Максимална влажност: </string>
     <string name="irrigation">Поливане: </string>
     <string name="minutes">минути </string>
+    <string name="irrigate">Полей</string>
+    <string name="close">Затвори</string>
 </resources>

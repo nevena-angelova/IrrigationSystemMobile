@@ -53,7 +53,7 @@ public class PlantDialogFragment extends DialogFragment {
         return new AlertDialog.Builder(requireContext())
                 .setTitle(plant.getPlantType().getName())
                 .setView(view)
-                .setPositiveButton("OK", null)
+                .setPositiveButton(R.string.close, null)
                 .create();
     }
 
