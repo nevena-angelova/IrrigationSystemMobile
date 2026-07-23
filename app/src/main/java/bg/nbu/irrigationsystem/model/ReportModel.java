@@ -11,7 +11,9 @@ public class ReportModel {
     private double soilMoisture;
     private double minSoilMoisture;
     private double maxSoilMoisture;
-    private int irrigationDuration;
+    private double temperature;
+    private double humidity;
+    private double light;
     private List<String> warnings;
 
     public long getPlantId() {
@@ -42,11 +44,20 @@ public class ReportModel {
         return maxSoilMoisture;
     }
 
-    public int getIrrigationDuration() {
-        return irrigationDuration;
+    public double getTemperature() {
+        return temperature;
+    }
+
+    public double getHumidity() {
+        return humidity;
+    }
+
+    public double getLight() {
+        return light;
     }
 
     public List<String> getWarnings() {
         return warnings;
     }
+
 }

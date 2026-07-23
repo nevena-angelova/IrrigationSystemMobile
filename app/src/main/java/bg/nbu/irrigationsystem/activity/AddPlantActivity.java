@@ -31,7 +31,7 @@ public class AddPlantActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_plant);
 
-        // Check if user is logged in and redirect to login if not
+        // Check if user is logged in and redirect to Login page if not
         SessionManager session = new SessionManager(this);
         if (!session.isLoggedIn()) {
             Intent intent = new Intent(AddPlantActivity.this, LoginActivity.class);
@@ -43,7 +43,7 @@ public class AddPlantActivity extends AppCompatActivity {
 
         setPlantTypes(apiService);
 
-        Button addButton = findViewById(R.id.login);
+        Button addButton = findViewById(R.id.addPlant);
 
         addButton.setOnClickListener(view -> addPlant(apiService));
     }

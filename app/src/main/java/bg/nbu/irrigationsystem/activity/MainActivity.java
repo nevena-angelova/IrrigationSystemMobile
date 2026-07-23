@@ -23,14 +23,15 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button addPlant;
+    Button addPlantBtn;
+    Button statisticBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Check if user is logged in and redirect to login if not
+        // Check if user is logged in and redirect to Login page if not
         SessionManager session = new SessionManager(this);
         if (!session.isLoggedIn()) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
@@ -38,18 +39,25 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        addPlant = findViewById(R.id.addPlant);
-        addPlant.setOnClickListener(view -> {
+        addPlantBtn = findViewById(R.id.addPlantBtn);
+        addPlantBtn.setOnClickListener(view -> {
             Intent intent = new Intent(MainActivity.this, AddPlantActivity.class);
             intent.setAction(Intent.ACTION_VIEW);
             startActivity(intent);
         });
 
-        setPlants();
+        statisticBtn = findViewById(R.id.statisticBtn);
+        statisticBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, StatisticActivity.class);
+            intent.setAction(Intent.ACTION_VIEW);
+            startActivity(intent);
+        });
+
+        getPlants();
     }
 
     // Get plants from API and set them to the list view
-    private void setPlants(){
+    private void getPlants(){
         ApiService apiService = ApiClient.getClient(this).create(ApiService.class);
         apiService.getPlants().enqueue(new Callback<>() {
             @Override

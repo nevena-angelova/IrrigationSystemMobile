@@ -14,11 +14,20 @@
     <string name="add_plant">Добави култура</string>
     <string name="growth_phase">Фаза на развитие: </string>
     <string name="recommendations">Препоръки: </string>
-    <string name="moisture">Влажност: </string>
-    <string name="min_moisture">Минимална влажност: </string>
-    <string name="max_moisture">Максимална влажност: </string>
+    <string name="moisture">Влажност на почвата: </string>
+    <string name="min_moisture">Минимална влажност на почвата: </string>
+    <string name="max_moisture">Максимална влажност на почвата: </string>
     <string name="irrigation">Поливане: </string>
     <string name="minutes">минути </string>
     <string name="irrigate">Полей</string>
     <string name="close">Затвори</string>
+    <string name="statistic">Статисктика</string>
+    <string name="temperature">Температура</string>
+    <string name="humidity">Влажност</string>
+    <string name="light">Осветеност</string>
+    <string name="controllerId">Номер на контролер</string>
+    <string name="distanceX">Разстояние между растенията</string>
+    <string name="distanceY">Разстояние между лехите</string>
+    <string name="emitter">Литра на час за растение</string>
+    <string name="emitterFlow">Литра за час на растение</string>
 </resources>

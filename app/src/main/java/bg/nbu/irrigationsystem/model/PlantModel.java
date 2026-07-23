@@ -9,7 +9,7 @@ public class PlantModel implements Serializable {
     private String plantingDate;
     private PlantTypeModel plantType;
     private ReportModel report;
-    private int deviceId;
+    private int controllerId;
     private int relayId;
 
     public int getId() {
@@ -28,8 +28,8 @@ public class PlantModel implements Serializable {
         return report;
     }
 
-    public int getDeviceId() {
-        return deviceId;
+    public int getControllerId() {
+        return controllerId;
     }
 
     public int getRelayId() {
@@ -77,11 +77,6 @@ public class PlantModel implements Serializable {
         return report.getSoilMoisture();
 
     }
-
-    public boolean needsIrrigation() {
-        return report.needsIrrigation();
-    }
-
     public List<String> getWarnings() {
         return report.getWarnings();
     }
@@ -89,12 +84,13 @@ public class PlantModel implements Serializable {
     public double getMaxSoilMoisture() {
         return report.getMaxSoilMoisture();
     }
-
-    public double getIrrigationDuration() {
-        return report.getIrrigationDuration();
-    }
-
     public double getMinSoilMoisture() {
         return report.getMinSoilMoisture();
     }
+
+    public double getTemperature() { return report.getTemperature();}
+
+    public double getHumidity() { return report.getHumidity();}
+
+    public double getLight() { return report.getLight();}
 }

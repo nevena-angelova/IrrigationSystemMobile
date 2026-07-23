@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 
 import java.util.List;
 
+import bg.nbu.irrigationsystem.model.EtcStatisticModel;
 import bg.nbu.irrigationsystem.model.PlantModel;
 import bg.nbu.irrigationsystem.model.PlantTypeModel;
 import retrofit2.Call;
@@ -25,13 +26,9 @@ public interface ApiService {
     @GET("api/plant/plants")
     Call<List<PlantModel>> getPlants();
 
-    @POST("api/plant/irrigate/{deviceId}/{relayId}/{irrigationDuration}")
-    Call<String> irrigate(
-            @Path("deviceId") int deviceId,
-            @Path("relayId") int relayId,
-            @Path("irrigationDuration") int irrigationDuration
-    );
-
     @POST("api/plant/create")
     Call<String> createPlant(@Body JsonObject plantInfo);
+
+    @GET("api/statistic/etc")
+    Call<List<EtcStatisticModel>> getEtcStatistics();
 }

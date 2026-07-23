@@ -50,11 +50,65 @@
             android:paddingTop="30dp"
             android:spinnerMode="dropdown" />
 
-        <Button
-            android:id="@+id/login"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/controllerId"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/controllerId"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/dark_blue_gray"
+            android:inputType="number" />
+
+        <!-- Distance X -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/distanceX"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/distanceX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/distanceY"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/distanceY"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@string/emitterFlow"
+            android:textSize="10sp" />
+
+        <EditText
+            android:id="@+id/emitterFlow"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal" />
+
+        <Button
+            android:id="@+id/addPlant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
             android:text="@string/add_plant_type" />
 
     </LinearLayout>

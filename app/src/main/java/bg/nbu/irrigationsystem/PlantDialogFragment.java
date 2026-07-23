@@ -19,9 +19,6 @@ import retrofit2.Response;
 public class PlantDialogFragment extends DialogFragment {
 
     private static final String ARG_PLANT = "plant";
-    Button btn_irrigate;
-
-
     public static PlantDialogFragment newInstance(PlantModel plant) {
         PlantDialogFragment fragment = new PlantDialogFragment();
         Bundle args = new Bundle();
@@ -38,18 +35,6 @@ public class PlantDialogFragment extends DialogFragment {
 
         setViewFields(view, plant);
 
-        btn_irrigate = view.findViewById(R.id.btnIrrigate);
-
-        if(plant.needsIrrigation()){
-            btn_irrigate.setVisibility(View.VISIBLE);
-            btn_irrigate.setOnClickListener(v -> {
-                irrigate(plant.getDeviceId(), plant.getRelayId(), plant.getIrrigationDuration());
-            });
-        }
-        else {
-            btn_irrigate.setVisibility(View.GONE);
-        }
-
         return new AlertDialog.Builder(requireContext())
                 .setTitle(plant.getPlantType().getName())
                 .setView(view)
@@ -65,7 +50,9 @@ public class PlantDialogFragment extends DialogFragment {
         TextView soilMoisture = view.findViewById(R.id.soilMoisture);
         TextView minSoilMoisture = view.findViewById(R.id.minSoilMoisture);
         TextView maxSoilMoisture = view.findViewById(R.id.maxSoilMoisture);
-        TextView irrigationDuration = view.findViewById(R.id.irrigationDuration);
+        TextView temperature = view.findViewById(R.id.temperature);
+        TextView humidity = view.findViewById(R.id.humidity);
+        TextView light = view.findViewById(R.id.light);
         TextView warnings = view.findViewById(R.id.warnings);
 
         growthPhaseName.setText(plant.getGrowthPhaseName());
@@ -74,27 +61,10 @@ public class PlantDialogFragment extends DialogFragment {
         soilMoisture.setText(String.valueOf(plant.getSoilMoisture()));
         minSoilMoisture.setText(String.valueOf(plant.getMinSoilMoisture()));
         maxSoilMoisture.setText(String.valueOf(plant.getMaxSoilMoisture()));
-        irrigationDuration.setText(String.valueOf(plant.getIrrigationDuration()));
+        temperature.setText(String.valueOf((plant.getTemperature())));
+        humidity.setText(String.valueOf((plant.getHumidity())));
+        light.setText(String.valueOf((plant.getLight())));
         warnings.setText(android.text.TextUtils.join(", ", plant.getWarnings()));
-    }
-
-    // Irrigate plant to the API
-    private void irrigate(int deviceId, int relayId, double irrigationDuration) {
-
-        ApiService apiService = ApiClient.getClient(getContext()).create(ApiService.class);
-        apiService.irrigate(deviceId, relayId, (int) irrigationDuration).enqueue(new Callback<String>() {
-            @Override
-            public void onResponse(Call<String> call, Response<String> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    Toast.makeText(getContext(), response.body() , Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<String> call, Throwable t) {
-                Toast.makeText(getContext(), "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 }
 
